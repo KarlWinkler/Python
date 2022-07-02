@@ -1,6 +1,8 @@
 import file_io as io
 import operator
 
+debug = True
+
 class bedmas_calculator:
     '''
         expects a list were each pair of entries is a list of numbers and a list of operators
@@ -21,14 +23,33 @@ class bedmas_calculator:
         return out_array             
 
     def calculate_recursive(self, nums, operators):
+        if debug:
+            print(nums)
+            print(operators)
 
         self.proccess_brackets(nums, operators)
+        if debug:
+            print('brackets')
+            print(nums)
+            print(operators)
 
         self.calculate_step(nums, operators, ['^', '**'])
+        if debug:
+            print('exponents')
+            print(nums)
+            print(operators)
 
         self.calculate_step(nums, operators, ['*', '/', '//', '%'])
+        if debug:
+            print('multiplication')
+            print(nums)
+            print(operators)
 
         self.calculate_step(nums, operators, ['+', '-'])
+        if debug:
+            print('addition')
+            print(nums)
+            print(operators)
 
         return nums[0]
 
