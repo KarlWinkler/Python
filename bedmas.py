@@ -100,11 +100,13 @@ class bedmas_calculator:
         num1, num2 = float(num1), float(num2)
         return ops[op](num1, num2)
 
-file_io = io.bedmas_file_io('bedmas-test.txt')
+# file_io = io.bedmas_file_io('bedmas-test.txt')
+file_io = io.csv_file_io('bedmas-csv.csv')
+
 calc = bedmas_calculator(file_io)
 calc_res = calc.calculate()   
 
-i = 0
+i = 1
 for res in calc_res:
     print(f"result of equation {i} is {res}")
     i += 1

@@ -43,11 +43,17 @@ class bedmas_file_io(file_io):
                     array.append(self.csv_to_array(line.strip('\n').strip('\r').strip('[').strip(']')))
     
             return array
-    
-        def amend_from_array(self, input):
-            file = open(self.file_name, 'a')
-            for entry in input:
-                file.write(entry + '\n')
 
-        def csv_to_array(self, csv):
-            return [entry.strip() for entry in csv.split(',')]
+class csv_file_io(file_io):
+
+    '''
+        expects a csv file with numbers and operators lists on sepetate lines
+    '''
+
+    def to_array(self):
+        array = []
+        file = open(self.file_name, 'r')
+        for line in file:
+            array.append(self.csv_to_array(line.strip('\n').strip('\r')))
+
+        return array
