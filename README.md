@@ -1,5 +1,4 @@
 # Python
-Python codes
 
 version `3.9.7`
 
