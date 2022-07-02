@@ -10,7 +10,7 @@ class bedmas_calculator:
         self.input_reader = input_reader
 
     def calculate(self):    
-        in_array = self.input_reader.read_to_array()
+        in_array = self.input_reader.to_array()
         out_array = []
         print(in_array)
         i = 0
@@ -24,11 +24,11 @@ class bedmas_calculator:
 
         self.proccess_brackets(nums, operators)
 
-        self.calculate_exponents(nums, operators)
+        self.calculate_step(nums, operators, ['^', '**'])
 
-        self.calculate_mult_div(nums, operators)
+        self.calculate_step(nums, operators, ['*', '/', '//', '%'])
 
-        self.calculate_add_sub(nums, operators)
+        self.calculate_step(nums, operators, ['+', '-'])
 
         return nums[0]
 
@@ -54,34 +54,15 @@ class bedmas_calculator:
                     j += 1
             i += 1
 
-    def calculate_exponents(self, nums, operators):
+    def calculate_step(self, nums, operators, ops):
         i = 0
         while i < len(operators):
-            if operators[i] == '^' or operators[i] == '**':
-                calc = self.eval_expr(nums[i], '**', nums[i+1])
-                del nums[i:i+1]
+            if operators[i] in ops:
+                calc = self.eval_expr(nums[i], operators[i], nums[i+1])
+                del nums[i:i+2]
                 del operators[i]
                 nums.insert(i, calc)
-            i += 1
-
-    def calculate_add_sub(self, nums, operators):
-        i = 0
-        while i < len(operators):
-            if operators[i] == '+' or operators[i] == '-':
-                calc = self.eval_expr(nums[i], operators[0], nums[i+1])
-                del nums[i:i+2]
-                del operators[i:i+1]
-                nums.insert(i, calc)
-            i += 1
-
-    def calculate_mult_div(self, nums, operators):
-        i = 0
-        while i < len(operators):
-            if operators[i] == '*' or operators[i] == '/':
-                calc = self.eval_expr(nums[i], operators[0], nums[i+1])
-                del nums[i:i+2]
-                del operators[i:i+1]
-                nums.insert(i, calc)
+                i -= 1
             i += 1
 
     def eval_expr(self, num1, op, num2):

@@ -1,7 +1,10 @@
 # entering calculations: 
 
-`end` ends the file for reading (bedmas_file_reader)  
+##  bedmas_file_reader  
+`end` ends the file for reading
 `#` is a comment
+
+## calculation entry basics
 
 first array contains the numbers to be operated on in order
 

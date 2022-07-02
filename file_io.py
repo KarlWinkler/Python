@@ -3,7 +3,7 @@ class file_io:
     def __init__(self,  file_name):
         self.file_name = file_name
 
-    def read_to_array(self):
+    def to_array(self):
         list = []
         file = open(self.file_name, 'r')
         for line in file:
@@ -21,12 +21,17 @@ class file_io:
         for entry in input:
             file.write(entry + '\n')
 
-class bedmas_file_io:
+    def csv_to_array(self, csv):
+        return [entry.strip() for entry in csv.split(',')]
 
-        def __init__(self, file_name):
-            self.file_name = file_name
+class bedmas_file_io(file_io):
     
-        def read_to_array(self):
+        '''
+            expects a file in the format of bedmas-test.txt
+            documentation of the format is in doc/bedmas_file_entry.md
+        '''
+
+        def to_array(self):
             array = []
             file = open(self.file_name, 'r')
             for line in file:
